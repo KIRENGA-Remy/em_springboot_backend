@@ -6,4 +6,8 @@ public class CreateBookingRequest {
 
     @NotNull
     private Long eventId;
+
+    public Long getEventId() {
+        return eventId;
+    }
 }

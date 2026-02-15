@@ -93,4 +93,11 @@ public class Event {
         }
         this.status = EventStatus.PUBLISHED;
     }
+
+    public void decreaseAvailableSeats(){
+        if(this.availableSeats <= 0){
+            throw new IllegalStateException("No seat left");
+        }
+        this.availableSeats--;
+    }
 }
