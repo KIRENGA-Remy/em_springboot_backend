@@ -1,6 +1,8 @@
-package com.java.projects.event_management_system.user.entity;
+package com.java.projects.event_management_system.booking.entity;
 
 import com.java.projects.event_management_system.common.BookingStatus;
+import com.java.projects.event_management_system.event.entity.Event;
+import com.java.projects.event_management_system.user.entity.User;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -12,8 +14,9 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "user_id", nullable = false)
-    private Long userId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -28,11 +31,31 @@ public class Booking {
 
     protected Booking(){}
 
-    public Booking(Event event, Long userId){
+    public Booking(Event event, User user){
         this.event = event;
-        this.userId = userId;
+        this.user = user;
         this.status = BookingStatus.PENDING;
         this.createdAt = LocalDateTime.now();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public BookingStatus getStatus() {
+        return status;
+    }
+
+    public Event getEvent() {
+        return event;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
 
     public void confirm(){

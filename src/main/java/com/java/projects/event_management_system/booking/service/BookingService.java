@@ -1,11 +1,12 @@
-package com.java.projects.event_management_system.user.service;
+package com.java.projects.event_management_system.booking.service;
 
 import com.java.projects.event_management_system.common.EventStatus;
-import com.java.projects.event_management_system.user.dto.request.CreateBookingRequest;
-import com.java.projects.event_management_system.user.entity.Booking;
-import com.java.projects.event_management_system.user.entity.Event;
-import com.java.projects.event_management_system.user.repository.BookingRepository;
-import com.java.projects.event_management_system.user.repository.EventRepository;
+import com.java.projects.event_management_system.booking.request.CreateBookingRequest;
+import com.java.projects.event_management_system.booking.entity.Booking;
+import com.java.projects.event_management_system.event.entity.Event;
+import com.java.projects.event_management_system.booking.repository.BookingRepository;
+import com.java.projects.event_management_system.event.repository.EventRepository;
+import com.java.projects.event_management_system.user.entity.User;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,7 @@ public class BookingService {
     }
 
     @Transactional
-    public Booking createBooking(CreateBookingRequest request, Long userId){
+    public Booking createBooking(CreateBookingRequest request, User user){
         Event event = eventRepository.findByIdAndUpdate(request.getEventId())
                 .orElseThrow(() -> new RuntimeException("Event not found"));
 
@@ -34,7 +35,8 @@ public class BookingService {
 
         event.decreaseAvailableSeats();
 
-        Booking booking = new Booking(event, userId);
+        Booking booking = new Booking(event, user);
+
         return bookingRepository.save(booking);
     }
 }

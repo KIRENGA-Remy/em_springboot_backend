@@ -1,6 +1,6 @@
-package com.java.projects.event_management_system.user.repository;
+package com.java.projects.event_management_system.event.repository;
 
-import com.java.projects.event_management_system.user.entity.Event;
+import com.java.projects.event_management_system.event.entity.Event;
 import jakarta.persistence.LockModeType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Lock;

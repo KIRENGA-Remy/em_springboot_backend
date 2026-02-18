@@ -1,10 +1,11 @@
-package com.java.projects.event_management_system.user.controller;
+package com.java.projects.event_management_system.event.controller;
 
-import com.java.projects.event_management_system.user.dto.request.CreateEventRequest;
-import com.java.projects.event_management_system.user.dto.response.EventResponse;
-import com.java.projects.event_management_system.user.mapper.EventMapper;
-import com.java.projects.event_management_system.user.service.EventService;
+import com.java.projects.event_management_system.event.request.CreateEventRequest;
+import com.java.projects.event_management_system.event.response.EventResponse;
+import com.java.projects.event_management_system.event.mapper.EventMapper;
+import com.java.projects.event_management_system.event.service.EventService;
 import jakarta.validation.Valid;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -19,6 +20,7 @@ public class EventController {
         this.eventMapper = eventMapper;
     }
 
+    @PreAuthorize("hasRole('ORGANIZER')")
     @PostMapping()
     public EventResponse create(@Valid @RequestBody CreateEventRequest request){
         Long organizerId = 1L;

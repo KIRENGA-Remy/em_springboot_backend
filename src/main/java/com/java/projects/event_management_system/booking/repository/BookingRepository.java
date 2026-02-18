@@ -1,6 +1,6 @@
-package com.java.projects.event_management_system.user.repository;
+package com.java.projects.event_management_system.booking.repository;
 
-import com.java.projects.event_management_system.user.entity.Booking;
+import com.java.projects.event_management_system.booking.entity.Booking;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

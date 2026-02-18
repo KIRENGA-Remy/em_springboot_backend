@@ -1,4 +1,4 @@
-package com.java.projects.event_management_system.user.entity;
+package com.java.projects.event_management_system.event.entity;
 
 import com.java.projects.event_management_system.common.EventStatus;
 import jakarta.persistence.*;

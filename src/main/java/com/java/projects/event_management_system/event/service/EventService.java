@@ -1,8 +1,8 @@
-package com.java.projects.event_management_system.user.service;
+package com.java.projects.event_management_system.event.service;
 
-import com.java.projects.event_management_system.user.dto.request.CreateEventRequest;
-import com.java.projects.event_management_system.user.entity.Event;
-import com.java.projects.event_management_system.user.repository.EventRepository;
+import com.java.projects.event_management_system.event.request.CreateEventRequest;
+import com.java.projects.event_management_system.event.entity.Event;
+import com.java.projects.event_management_system.event.repository.EventRepository;
 import org.springframework.stereotype.Service;
 
 @Service

@@ -1,4 +1,4 @@
-package com.java.projects.event_management_system.user.dto.request;
+package com.java.projects.event_management_system.event.request;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;

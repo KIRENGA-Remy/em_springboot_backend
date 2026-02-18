@@ -1,4 +1,4 @@
-package com.java.projects.event_management_system.user.dto.response;
+package com.java.projects.event_management_system.event.response;
 
 import com.java.projects.event_management_system.common.EventStatus;
 
