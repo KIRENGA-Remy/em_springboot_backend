@@ -4,6 +4,7 @@ import com.java.projects.event_management_system.event.request.CreateEventReques
 import com.java.projects.event_management_system.event.response.EventResponse;
 import com.java.projects.event_management_system.event.mapper.EventMapper;
 import com.java.projects.event_management_system.event.service.EventService;
+import com.java.projects.event_management_system.security.util.SecurityUtil;
 import jakarta.validation.Valid;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +24,7 @@ public class EventController {
     @PreAuthorize("hasRole('ORGANIZER')")
     @PostMapping()
     public EventResponse create(@Valid @RequestBody CreateEventRequest request){
-        Long organizerId = 1L;
+        Long organizerId = SecurityUtil.getCurrentUserId();
         return eventMapper.toResponse(
                 eventService.createEvent(request, organizerId)
         );
@@ -31,7 +32,7 @@ public class EventController {
 
     @PostMapping("/{id}/publish")
     public EventResponse publish(@PathVariable Long id){
-        Long organizerId = 1L;
+        Long organizerId = SecurityUtil.getCurrentUserId();
         return eventMapper.toResponse(
                 eventService.publishEvent(id, organizerId)
         );

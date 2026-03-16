@@ -3,6 +3,7 @@ package com.java.projects.event_management_system.payment.controller;
 
 import com.java.projects.event_management_system.payment.request.PaymentWebhookRequest;
 import com.java.projects.event_management_system.payment.service.PaymentService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +19,7 @@ public class PaymentWebhookController {
         this.paymentService = paymentService;
     }
 
+    @PreAuthorize("hasRole('USER')")
     @PostMapping
     public void handleWebhook(@RequestBody PaymentWebhookRequest request){
         paymentService.handlePaymentResult(

@@ -6,9 +6,13 @@ import com.java.projects.event_management_system.booking.entity.Booking;
 import com.java.projects.event_management_system.event.entity.Event;
 import com.java.projects.event_management_system.booking.repository.BookingRepository;
 import com.java.projects.event_management_system.event.repository.EventRepository;
+import com.java.projects.event_management_system.security.util.SecurityUtil;
 import com.java.projects.event_management_system.user.entity.User;
 import jakarta.transaction.Transactional;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
+
+import java.awt.print.Book;
 
 @Service
 public class BookingService {
@@ -38,5 +42,18 @@ public class BookingService {
         Booking booking = new Booking(event, user);
 
         return bookingRepository.save(booking);
+    }
+
+    public Booking getBooking(Long id){
+        Booking booking = bookingRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Booking not found."));
+
+        Long currentUserId = SecurityUtil.getCurrentUserId();
+
+        if(!booking.getUser().getId().equals(currentUserId)){
+            throw new AccessDeniedException("Not your booking");
+        }
+
+        return booking;
     }
 }
